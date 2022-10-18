@@ -11,7 +11,7 @@ class Bullet:
         self.y = 0
         self.speed = 1000 * dt
         self.state = False
-        self.type = 1  # 0 laser  1 cannon  2 ball
+        self.type = 0 # 0 laser  1 cannon  2 ball
         self.value = 0
 
         # Animation change time

@@ -4,13 +4,13 @@ class Menu:
     def __init__(self):
         self.run = 1
 
-    def draw(self, font):
+    def draw(self, font, label_font):
 
         start = font.render("START", True,(255,255,255))
-        label = font.render("Press the mouse to begin...", 1, (255, 255, 255))
+        label = label_font.render("SPACE SHOOTER", 1, (255, 255, 255))
         screen.blit(label, (WIDTH / 2 - label.get_width() / 2, 250))
-        back_key = font.render("backspace --> main menu", 1, (255, 255, 255))
-        screen.blit(back_key, (WIDTH - back_key.get_width() - 10, 10))
+        name = font.render("65010373 Takdanai Deephuak", 1, (255, 255, 255))
+        screen.blit(name, (10, HEIGHT-30))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -26,6 +26,6 @@ class Menu:
 
 
 
-        screen.blit(start,(WIDTH/3, HEIGHT*2 /3))
+        screen.blit(start,(WIDTH/2 - start.get_width(), HEIGHT* 2 /3))
 
 

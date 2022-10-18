@@ -42,7 +42,8 @@ class Player:
         # Collision
         if len(erect) >= 1:
             for i in range(enum):
-                print(erect[0])
+                if self.rect.colliderect(erect[i]):
+                    print("D A M A G E")
 
     def draw(self):
         self.hitbox = pygame.Rect(self.x, self.y, 64, 64)

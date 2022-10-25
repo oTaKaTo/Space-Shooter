@@ -18,30 +18,11 @@ class Bullet:
         self.totaltime = 0
         self.change_time = 50/1000
         self.hitbox = (self.x+20 ,self.y,64, 64)
-        self.laser = [pygame.image.load("pic/bullet/laser/1.png"),
-                              pygame.image.load("pic/bullet/laser/2.png"),
-                              pygame.image.load("pic/bullet/laser/3.png"),
-                              pygame.image.load("pic/bullet/laser/4.png"),
-                              pygame.image.load("pic/bullet/laser/5.png"),
-                              pygame.image.load("pic/bullet/laser/6.png"),
-                              pygame.image.load("pic/bullet/laser/7.png"),
-                              pygame.image.load("pic/bullet/laser/8.png")]
+        self.laser = laser
 
-        self.cannon = [pygame.image.load("pic/bullet/canon/1.png"),
-                       pygame.image.load("pic/bullet/canon/2.png"),
-                       pygame.image.load("pic/bullet/canon/3.png"),
-                       pygame.image.load("pic/bullet/canon/4.png")]
+        self.cannon = cannon
 
-        self.ball = [pygame.image.load("pic/bullet/ball/1.png"),
-                     pygame.image.load("pic/bullet/ball/2.png"),
-                     pygame.image.load("pic/bullet/ball/3.png"),
-                     pygame.image.load("pic/bullet/ball/4.png"),
-                     pygame.image.load("pic/bullet/ball/5.png"),
-                     pygame.image.load("pic/bullet/ball/6.png"),
-                     pygame.image.load("pic/bullet/ball/7.png"),
-                     pygame.image.load("pic/bullet/ball/8.png"),
-                     pygame.image.load("pic/bullet/ball/9.png"),
-                     pygame.image.load("pic/bullet/ball/10.png")]
+        self.ball = ball
 
 
     def update(self, x, y):
@@ -72,7 +53,7 @@ class Bullet:
             self.x = x + 2
             self.y = y + 10
         if self.state:
-            self.y -= self.speed
+
             if self.totaltime >= self.change_time:
                 self.value += 1
                 self.totaltime = 0
@@ -88,7 +69,7 @@ class Bullet:
                 self.hitbox = pygame.Rect(self.x + 24, self.y, 16, 64)
             else:
                 self.hitbox = pygame.Rect(self.x+16 , self.y+16, 32, 32)
-            pygame.draw.rect(screen, (255,0,0), self.hitbox, 2)
+            #pygame.draw.rect(screen, (255,0,0), self.hitbox, 2)
 
     def run(self,x,y):
         self.update(x, y)

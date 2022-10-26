@@ -1,7 +1,7 @@
 import pygame
 
 from PBullet import Pbullet
-
+from xpbar import *
 from healthbar import *
 from enemy import *
 from settings import *
@@ -10,13 +10,18 @@ class Player:
     def __init__(self):
         self.Max_HP = 100
         self.HP = 100
-        self.XP = 0
-        self.Max_XP = 10
-        self.level = 1
+
         self.x = 370
         self.y = 850
 
         self.gameover = 0
+
+        self.XP = 0
+        self.Max_XP = 10
+        self.level = 1
+        self.last_xp = 0
+        self.diff_xp = 0
+        self.cur_xp = 0
 
         # invisible after be hit
         self.invisible_time = 0.2
@@ -37,20 +42,27 @@ class Player:
         self.playerImg = pygame.image.load("pic/player/ship/base/png/full_hp.png")
         self.playerImg = pygame.transform.scale(self.playerImg, (64, 64))
         self.rect = self.playerImg.get_rect()
-        # Health bar class
+        # Health , xp bar class
         self.hb = Healthbar(self.Max_HP, self.HP)
+        self.xp = XPbar(self.Max_XP, self.XP)
     def create_bullets(self, x, y,type):
         self.bullets.append(Pbullet(x, y,type))
 
     def update(self, erect, enum , ebull , KP):
 
         # Level system
+        self.last_xp = self.XP
         self.XP = KP
-        print(self.XP)
-        if self.XP >= self.Max_XP :
+        self.diff_xp = self.XP - self.last_xp
+        if self.diff_xp >= 1 :
+            self.xp.get_xp(self.diff_xp)
+            self.cur_xp += self.diff_xp
+            self.diff_xp = 0
+        if self.cur_xp >= self.Max_XP :
             self.level += 1
-            self.Max_XP += 100 * (self.level/2)
-
+            self.cur_xp = 0
+            self.xp.get_damage(self.Max_XP)
+            self.Max_XP += 5 * int(self.level/2)
 
         invictimer = 0
         self.count_time += dt
@@ -162,6 +174,7 @@ class Player:
 
     def draw_gui(self):
         self.hb.update()
+        self.xp.update(self.Max_XP , self.cur_xp)
 
     def draw_player(self):
         self.hitbox = pygame.Rect(self.x, self.y, 64, 64)

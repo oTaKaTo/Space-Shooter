@@ -5,7 +5,7 @@ import math
 pygame.init()
 # sound
 pshoot = pygame.mixer.Sound("sound/pshot.wav")
-phit = pygame.mixer.Sound("sound/poof.wav")
+phit = pygame.mixer.Sound("sound/pcrack.wav")
 bgm = pygame.mixer.music.load("sound/bgm.mp3")
 
 

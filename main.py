@@ -37,13 +37,12 @@ while running:
     if p.gameover == 1 :
         game_state = 1
 
-    if m.start == 1:
+    # If mouse click start
+    if m.start == 1 and game_state != 3:
+        m.start = 0
         game_state = 3
-
-        p = Player()
-        b = Bullet()
-        e = Enemy()
-
+    if m.quit == 1:
+        running = False
 
     if game_state == 1:
         m.draw(font, main_font)
@@ -54,6 +53,7 @@ while running:
         #b.run(p.x, p.y)
         p.run(e.rect, e.numbers ,e.bullets)
         e.run(p.rect, p.bullets , p.x , p.y)
+        print(e.start)
 
     clock.tick(60)
 

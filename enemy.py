@@ -255,8 +255,8 @@ class Enemy:
             #     print("Player collision happened !")
             for pbullet in pbullets:
                 if self.rect[i].colliderect(pbullet.hitbox):
-                     print("Bullet collision happened !")
                      if pbullet.hitable == 1:
+                        print("Bullet collision happened !")
                         self.hp[i] -= pbullet.damage
                      if pbullet.type != 2:
                         pbullet.hitable = 0

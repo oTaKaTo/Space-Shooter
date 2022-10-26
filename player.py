@@ -93,9 +93,17 @@ class Player:
             self.hb.get_damage(10)
 
 
-        for bullet in self.bullets:
-            bullet.run()
+        #for bullet in self.bullets:
+            #bullet.run()
 
+        # Check bullet out of vision to del from self.bullets
+        for i, bullet in enumerate(self.bullets):
+            bullet.run()
+            if bullet.y <= -64:
+                del self.bullets[i]
+                break
+
+        print(self.bullets)
         # rect update
         self.rect.x = self.x
         self.rect.y = self.y
@@ -140,6 +148,8 @@ class Player:
 
         if self.HP <= 0 :
             self.gameover = 1
+
+
     def draw_gui(self):
         self.hb.update()
     def draw_player(self):

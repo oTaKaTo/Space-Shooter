@@ -57,6 +57,7 @@ class Pbullet:
         if self.totaltime >= self.change_time:
             self.value += 1
             self.totaltime = 0
+
         # Out of vision
         if self.y <= -64:
             del self

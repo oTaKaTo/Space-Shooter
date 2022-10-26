@@ -5,7 +5,7 @@ from settings import *
 class New_bullet:
     def __init__(self, x, y , etype):
         self.damage = 10
-
+        self.hitable = 1
         if etype == 0:
             self.x = x + 18
             self.y = y + 2
@@ -86,4 +86,5 @@ class New_bullet:
 
     def run(self,prect):
         self.update(prect)
-        self.draw()
+        if self.hitable:
+            self.draw()

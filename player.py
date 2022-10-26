@@ -1,9 +1,10 @@
 import pygame
 
 from PBullet import Pbullet
-from settings import *
+
 from healthbar import *
 from enemy import *
+from settings import *
 
 class Player:
     def __init__(self):
@@ -103,7 +104,6 @@ class Player:
                 del self.bullets[i]
                 break
 
-        print(self.bullets)
         # rect update
         self.rect.x = self.x
         self.rect.y = self.y
@@ -133,12 +133,13 @@ class Player:
             # Enemy bullet collision
             for ebullet in ebull:
                 if ebullet.hitbox.colliderect(self.hitbox):
-                    print("Enemy Bullet collision happened !")
-                    if self.invis_cooldown == 0:
-                        self.HP -= 10
-                        self.hb.get_damage(10)
-                        phit.play()
-                        self.invis_cooldown = 1
+                    if ebullet.hitable:
+                        if self.invis_cooldown == 0:
+                            ebullet.hitable = 0
+                            self.HP -= 10
+                            self.hb.get_damage(10)
+                            phit.play()
+                            self.invis_cooldown = 1
 
             if self.invis_cooldown == 1:
                 self.invis_timer += dt
@@ -152,6 +153,7 @@ class Player:
 
     def draw_gui(self):
         self.hb.update()
+
     def draw_player(self):
         self.hitbox = pygame.Rect(self.x, self.y, 64, 64)
         screen.blit(self.playerImg, (self.x , self.y))

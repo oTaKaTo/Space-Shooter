@@ -15,7 +15,7 @@ class Healthbar (pygame.sprite.Sprite):
 
         self.health_bar_length = 400
         self.health_ratio = self.max_HP / self.health_bar_length
-        self.health_change_speed = 2
+        self.health_change_speed = 1
 
     def update(self):
         #self.basic_health()
@@ -54,6 +54,6 @@ class Healthbar (pygame.sprite.Sprite):
         health_bar_rect = pygame.Rect(10,10,self.cur_HP / self.health_ratio, 25)
         transition_bar_rect = pygame.Rect(health_bar_rect.right, 10, transition_width , 25)
 
+        pygame.draw.rect(screen, transition_color, transition_bar_rect)
         pygame.draw.rect(screen, (255,0,0), health_bar_rect)
-        pygame.draw.rect(screen, transition_color,transition_bar_rect)
         pygame.draw.rect(screen, (255,255,255), (10,10,self.health_bar_length,25), 4)

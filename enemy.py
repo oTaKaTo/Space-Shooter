@@ -3,10 +3,11 @@ import random
 from settings import *
 from bullet import *
 from EBullet import New_bullet
-
+from score import *
 class Enemy:
 
     def __init__(self):
+        self.score = Score()
         self.hp = []
         self.start = 0
         #enemy health
@@ -15,10 +16,8 @@ class Enemy:
         self.bighp = 1000
         #Hitbox size
         self.hitbox = []
-        self.b = Bullet()
         self.rect = []
         self.direction = []
-
         self.speed = []
         self.small_speed = random.randint(200,400) * dt
         self.medium_speed = random.randint(100,150) * dt
@@ -56,6 +55,16 @@ class Enemy:
         # add enemy time up to game runtime
         self.totaltime = 0
         self.addtime = 10
+
+    def crash(self,x,y):
+        for i in range(len(crash)):
+            crashImg = crash[i]
+            crashImg = pygame.transform.scale(crashImg, (48, 48))
+            screen.blit(crashImg, (x+10 , y+10))
+
+
+
+
     def magnetic_movement(self, px , py , i):
         if self.x[i] < px:
             self.x[i] += 1
@@ -180,9 +189,11 @@ class Enemy:
     def update(self,prect, pbullets , px ,py):
         self.counttime += dt
         self.totaltime += dt
-
-        for bullet in self.bullets:
+        for i, bullet in enumerate(self.bullets):
             bullet.run(prect)
+            if bullet.y <= -64:
+                del self.bullets[i]
+                break
 
         for i in range(self.numbers):
 
@@ -191,7 +202,6 @@ class Enemy:
             # if out of vision
             if self.y[i] >= 1000:
                 self.remove_enemy(i)
-
                 # random type again
                 rand = random.randint(0, 20)
                 # random enemy type
@@ -262,6 +272,15 @@ class Enemy:
                         pbullet.hitable = 0
 
             if self.hp[i] <= 0 :
+                # Adding Scores
+                if self.type[i] == 0:
+                    self.score.score_value += 100
+                elif self.type[i] == 1:
+                    self.score.score_value += 300
+                else:
+                    self.score.score_value += 1000
+                self.crash(self.x[i],self.y[i])
+                ecrash.play()
                 self.remove_enemy(i)
                 rand = random.randint(0, 20)
                 # random enemy type
@@ -323,7 +342,7 @@ class Enemy:
             self.start = 1
         # update enemy
         self.update(prect, pbullets , px , py)
-
         self.draw()
+        self.score.show_score()
 
 

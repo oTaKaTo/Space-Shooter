@@ -34,14 +34,26 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    # Ending State !
     if p.gameover == 1 :
         game_state = 1
+        del p
+        del e
+        del b
+        del m
+        p = Player()
+        e = Enemy()
+        b = Bullet()
+        m = Menu()
+
+
+
+
 
     # If mouse click start
-    if m.start == 1 and game_state != 3:
-        m.start = 0
+    if m.game_state:
         game_state = 3
-    if m.quit == 1:
+    if m.quit:
         running = False
 
     if game_state == 1:
@@ -51,9 +63,8 @@ while running:
         print("Score")
     if game_state == 3:
         #b.run(p.x, p.y)
-        p.run(e.rect, e.numbers ,e.bullets)
         e.run(p.rect, p.bullets , p.x , p.y)
-        print(e.start)
+        p.run(e.rect, e.numbers ,e.bullets)
 
     clock.tick(60)
 

@@ -7,6 +7,7 @@ pygame.init()
 pshoot = pygame.mixer.Sound("sound/pshot.wav")
 phit = pygame.mixer.Sound("sound/pcrack.wav")
 bgm = pygame.mixer.music.load("sound/bgm.mp3")
+ecrash = pygame.mixer.Sound("sound/ecrash.wav")
 
 
 # font
@@ -23,7 +24,7 @@ blue = (0,0,255)
 lime = (0,255,0)
 black = (0,0,0)
 
-score = 0
+
 XP =  0
 
 
@@ -74,5 +75,11 @@ ball = [ pygame.image.load("pic/bullet/ball/1.png"),
          pygame.image.load("pic/bullet/ball/8.png"),
          pygame.image.load("pic/bullet/ball/9.png"),
          pygame.image.load("pic/bullet/ball/10.png")]
+
+crash = [ pygame.image.load("pic/explosion/1.png"),
+            pygame.image.load("pic/explosion/2.png"),
+            pygame.image.load("pic/explosion/3.png"),
+            pygame.image.load("pic/explosion/4.png"),
+            pygame.image.load("pic/explosion/5.png")]
 
 enemy_bullet = pygame.image.load("pic/enemy/bullet/bullet.png")

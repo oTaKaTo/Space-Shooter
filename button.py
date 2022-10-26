@@ -27,15 +27,21 @@ class Button:
         self.text_rect = self.text.get_rect()
         self.text_x = self.rect[0]+(self.rect[2] - self.text_rect[2])/2
         self.text_y = self.rect[1]+(self.rect[3] - self.text_rect[3])/2
-
-    def run(self,pos):
-        self.clicked = False
+    def check_clicked(self):
+        pos = pygame.mouse.get_pos()
+        if pos[0] >= self.rect[0] and pos[0] <= self.rect[0] + self.rect[2] and pos[1] >= self.rect[1] and pos[1] <= self.rect[1] + self.rect[3]:
+            if pygame.mouse.get_pressed()[0]:
+                self.clicked = True
+            else:
+                if self.clicked:
+                    print("JOJO")
+                    self.clicked = False
+    def run(self):
         if self.color:
             pygame.draw.rect(self.screen,self.color,self.rect)
         if self.border_color:
             pygame.draw.rect(self.screen,self.border_color,self.rect,self.border_width)
-
         self.screen.blit(self.text, (self.text_x,self.text_y,self.text_rect[2],self.text_rect[1]))
-        if pos[0] >= self.rect[0] and pos[0] <= self.rect[0]+self.rect[2] and pos[1] >= self.rect[1] and pos[1] <= self.rect[1] + self.rect[3]:
-            self.clicked = True
-            return self.clicked
+        self.check_clicked()
+
+

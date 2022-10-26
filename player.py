@@ -11,6 +11,7 @@ class Player:
         self.Max_HP = 100
         self.HP = 100
         self.XP = 0
+        self.Max_XP = 10
         self.level = 1
         self.x = 370
         self.y = 850
@@ -32,7 +33,7 @@ class Player:
         self.weapon_change_time = 5
 
         self.hitbox = pygame.Rect(self.x, self.y, 64, 64)
-        self.speed = 500 * dt
+        self.speed = 1000 * dt
         self.playerImg = pygame.image.load("pic/player/ship/base/png/full_hp.png")
         self.playerImg = pygame.transform.scale(self.playerImg, (64, 64))
         self.rect = self.playerImg.get_rect()
@@ -41,7 +42,16 @@ class Player:
     def create_bullets(self, x, y,type):
         self.bullets.append(Pbullet(x, y,type))
 
-    def update(self, erect, enum , ebull):
+    def update(self, erect, enum , ebull , KP):
+
+        # Level system
+        self.XP = KP
+        print(self.XP)
+        if self.XP >= self.Max_XP :
+            self.level += 1
+            self.Max_XP += 100 * (self.level/2)
+
+
         invictimer = 0
         self.count_time += dt
         if  pygame.mouse.get_focused():
@@ -49,14 +59,14 @@ class Player:
             self.x -= 28
             self.y -= 22
         key = pygame.key.get_pressed()
-        # if key[pygame.K_a] or key[pygame.K_LEFT]:
-        #     self.x -= self.speed
-        # if key[pygame.K_d] or key[pygame.K_RIGHT]:
-        #     self.x += self.speed
-        # if key[pygame.K_w] or key[pygame.K_UP]:
-        #     self.y -= self.speed
-        # if key[pygame.K_s] or key[pygame.K_DOWN]:
-        #     self.y += self.speed
+        if key[pygame.K_a] or key[pygame.K_LEFT]:
+             self.x -= self.speed
+        if key[pygame.K_d] or key[pygame.K_RIGHT]:
+             self.x += self.speed
+        if key[pygame.K_w] or key[pygame.K_UP]:
+             self.y -= self.speed
+        if key[pygame.K_s] or key[pygame.K_DOWN]:
+             self.y += self.speed
 
         if key[pygame.K_SPACE] and self.count_time >= self.delay or pygame.mouse.get_pressed()[0] and self.count_time >= self.delay :
             self.count_time = 0
@@ -123,7 +133,6 @@ class Player:
             for i in range(enum):
 
                 if self.rect.colliderect(erect[i]):
-                    print("D A M A G E")
                     if self.invis_cooldown == 0:
                         self.HP -= 10
                         self.hb.get_damage(10)
@@ -159,7 +168,7 @@ class Player:
         screen.blit(self.playerImg, (self.x , self.y))
         #pygame.draw.rect(screen, (255, 0, 0), self.hitbox, 2)
 
-    def run(self, erect, enum , ebull):
-        self.update(erect, enum , ebull)
+    def run(self, erect, enum , ebull,eKP):
+        self.update(erect, enum , ebull,eKP)
         self.draw_player()
         self.draw_gui()

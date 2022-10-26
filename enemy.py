@@ -23,6 +23,8 @@ class Enemy:
         self.medium_speed = random.randint(100,150) * dt
         self.big_speed = random.randint(50,100) * dt
 
+        self.KP = 0
+
 
         self.x = []
         self.y = []
@@ -54,7 +56,7 @@ class Enemy:
         self.rand = []
         # add enemy time up to game runtime
         self.totaltime = 0
-        self.addtime = 10
+        self.addtime = 5
 
     def crash(self,x,y):
         for i in range(len(crash)):
@@ -191,7 +193,7 @@ class Enemy:
         self.totaltime += dt
         for i, bullet in enumerate(self.bullets):
             bullet.run(prect)
-            if bullet.y <= -64:
+            if bullet.y >= 1032:
                 del self.bullets[i]
                 break
 
@@ -266,7 +268,6 @@ class Enemy:
             for pbullet in pbullets:
                 if self.rect[i].colliderect(pbullet.hitbox):
                      if pbullet.hitable == 1:
-                        print("Bullet collision happened !")
                         self.hp[i] -= pbullet.damage
                      if pbullet.type != 2:
                         pbullet.hitable = 0
@@ -274,10 +275,13 @@ class Enemy:
             if self.hp[i] <= 0 :
                 # Adding Scores
                 if self.type[i] == 0:
+                    self.KP += 1
                     self.score.score_value += 100
                 elif self.type[i] == 1:
+                    self.KP += 3
                     self.score.score_value += 300
                 else:
+                    self.KP += 10
                     self.score.score_value += 1000
                 self.crash(self.x[i],self.y[i])
                 ecrash.play()
@@ -344,5 +348,6 @@ class Enemy:
         self.update(prect, pbullets , px , py)
         self.draw()
         self.score.show_score()
+
 
 

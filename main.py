@@ -64,7 +64,7 @@ while running:
     if game_state == 3:
         #b.run(p.x, p.y)
         e.run(p.rect, p.bullets , p.x , p.y)
-        p.run(e.rect, e.numbers ,e.bullets)
+        p.run(e.rect, e.numbers ,e.bullets,e.KP)
 
     clock.tick(60)
 

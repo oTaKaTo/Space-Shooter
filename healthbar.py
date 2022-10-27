@@ -17,9 +17,9 @@ class Healthbar (pygame.sprite.Sprite):
         self.health_ratio = self.max_HP / self.health_bar_length
         self.health_change_speed = 1
 
-    def update(self):
-        #self.basic_health()
-        self.advanced_health()
+    def update(self,Max_HP,curHP):
+        self.basic_health(Max_HP,curHP)
+        #self.advanced_health(Max_HP,curHP)
 
 
     def get_damage(self,amount):
@@ -34,11 +34,16 @@ class Healthbar (pygame.sprite.Sprite):
         if self.target_HP >= self.max_HP:
             self.target_HP = self.max_HP
 
-    def basic_health(self):
-        pygame.draw.rect(screen, (255,0,0), (10, 5, self.target_HP/self.health_ratio , 25))
-        pygame.draw.rect(screen, (255, 255, 255), (10, 5, self.health_bar_length, 25),4)
+    def basic_health(self,Max_HP,curHP):
+        self.max_HP = Max_HP
+        self.cur_HP = curHP
+        self.health_ratio = self.max_HP / self.health_bar_length
+        pygame.draw.rect(screen, (255,0,0), (10, 10, self.target_HP/self.health_ratio , 25))
+        pygame.draw.rect(screen, (255, 255, 255), (10, 10, self.health_bar_length, 25),4)
 
-    def advanced_health(self):
+    def advanced_health(self,Max_HP,curHP):
+        self.max_HP = Max_HP
+        self.cur_HP = curHP
         transition_width = 0
         transition_color = (255,0,0)
 

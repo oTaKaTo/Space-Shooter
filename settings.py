@@ -8,8 +8,8 @@ pshoot = pygame.mixer.Sound("sound/pshot.wav")
 phit = pygame.mixer.Sound("sound/pcrack.wav")
 bgm = pygame.mixer.music.load("sound/bgm.mp3")
 ecrash = pygame.mixer.Sound("sound/ecrash.wav")
-
-
+level_up = pygame.mixer.Sound("sound/levelup.wav")
+home = pygame.mixer.music.load("sound/home.wav")
 # font
 font = pygame.font.Font('font/8Bit.ttf', 20)
 main_font = pygame.font.Font('font/8-BITWONDER.ttf', 54)
@@ -25,7 +25,7 @@ lime = (0,255,0)
 black = (0,0,0)
 
 
-XP =  0
+
 
 
 # setting windows

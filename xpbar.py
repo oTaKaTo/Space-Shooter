@@ -39,7 +39,6 @@ class XPbar (pygame.sprite.Sprite):
 
         pygame.draw.rect(screen, yellow, (10, 40, self.target_xp/self.xp_ratio , 10))
         pygame.draw.rect(screen, white, (10, 40, self.xp_bar_length, 10),2)
-        print(self.max_xp)
 
     def advanced_xp(self,maxxp , curxp):
         self.max_xp = maxxp

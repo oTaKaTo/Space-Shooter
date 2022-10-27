@@ -8,9 +8,6 @@ from settings import *
 
 class Player:
     def __init__(self):
-        self.Max_HP = 100
-        self.HP = 100
-
         self.x = 370
         self.y = 850
 
@@ -22,7 +19,10 @@ class Player:
         self.last_xp = 0
         self.diff_xp = 0
         self.cur_xp = 0
+        self.level_text = ""
 
+        self.Max_HP = 100
+        self.HP = 100
         # invisible after be hit
         self.invisible_time = 0.2
         self.invis_cooldown = 0
@@ -45,12 +45,17 @@ class Player:
         # Health , xp bar class
         self.hb = Healthbar(self.Max_HP, self.HP)
         self.xp = XPbar(self.Max_XP, self.XP)
-    def create_bullets(self, x, y,type):
-        self.bullets.append(Pbullet(x, y,type))
+    def create_bullets(self, x, y,type,plevel):
+        self.bullets.append(Pbullet(x, y,type,plevel))
+
+    def show_level(self):
+        self.level_text = font.render("level : " + str(self.level), True, (255, 255, 255))
+        screen.blit(self.level_text, (600, 40))
 
     def update(self, erect, enum , ebull , KP):
-
         # Level system
+        self.Max_HP = 100 + ((self.level - 1) * 5)
+
         self.last_xp = self.XP
         self.XP = KP
         self.diff_xp = self.XP - self.last_xp
@@ -58,8 +63,15 @@ class Player:
             self.xp.get_xp(self.diff_xp)
             self.cur_xp += self.diff_xp
             self.diff_xp = 0
+
+        # level up
         if self.cur_xp >= self.Max_XP :
             self.level += 1
+            self.HP += 10
+            self.hb.get_health(10)
+            if self.HP >= self.Max_HP:
+                self.HP = self.Max_HP
+            level_up.play()
             self.cur_xp = 0
             self.xp.get_damage(self.Max_XP)
             self.Max_XP += 5 * int(self.level/2)
@@ -83,18 +95,18 @@ class Player:
         if key[pygame.K_SPACE] and self.count_time >= self.delay or pygame.mouse.get_pressed()[0] and self.count_time >= self.delay :
             self.count_time = 0
             pshoot.play()
-            self.create_bullets(self.x, self.y,self.type)
+            self.create_bullets(self.x, self.y,self.type , self.level)
 
         # Bullet type change
-        if key[pygame.K_q] and self.weapon_change_cooldown == 0:
+        if key[pygame.K_z] and self.weapon_change_cooldown == 0:
             self.type = 0
             self.delay = 0.1
             self.weapon_change_cooldown = 1
-        if key[pygame.K_w] and self.weapon_change_cooldown == 0:
+        if key[pygame.K_x] and self.weapon_change_cooldown == 0:
             self.type = 1
             self.delay = 0.3
             self.weapon_change_cooldown = 1
-        if key[pygame.K_e] and self.weapon_change_cooldown == 0:
+        if key[pygame.K_c] and self.weapon_change_cooldown == 0:
             self.type = 2
             self.delay = 0.3
             self.weapon_change_cooldown = 1
@@ -173,9 +185,9 @@ class Player:
 
 
     def draw_gui(self):
-        self.hb.update()
+        self.hb.update(self.Max_HP,self.HP)
         self.xp.update(self.Max_XP , self.cur_xp)
-
+        self.show_level()
     def draw_player(self):
         self.hitbox = pygame.Rect(self.x, self.y, 64, 64)
         screen.blit(self.playerImg, (self.x , self.y))

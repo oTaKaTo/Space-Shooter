@@ -191,6 +191,8 @@ class Enemy:
     def update(self,prect, pbullets , px ,py):
         self.counttime += dt
         self.totaltime += dt
+
+
         for i, bullet in enumerate(self.bullets):
             bullet.run(prect)
             if bullet.y >= 1032:

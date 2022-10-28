@@ -34,7 +34,6 @@ class Button:
                 self.clicked = True
             else:
                 if self.clicked:
-                    print("JOJO")
                     self.clicked = False
     def run(self):
         if self.color:

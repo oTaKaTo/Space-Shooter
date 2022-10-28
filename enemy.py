@@ -188,9 +188,10 @@ class Enemy:
                 self.type.append(2)
                 self.big_enemy()
 
-    def update(self,prect, pbullets , px ,py):
+    def update(self,prect, pbullets , px ,py , plevel):
         self.counttime += dt
         self.totaltime += dt
+        self.score.score_value += dt * (1 + (plevel*2))
 
 
         for i, bullet in enumerate(self.bullets):
@@ -341,13 +342,13 @@ class Enemy:
                 #pygame.draw.rect(screen, (255, 0, 0), self.hitbox[i], 2)
 
 
-    def run(self,prect, pbullets,px , py):
+    def run(self,prect, pbullets,px , py, plevel):
         # initialize enemy
         if self.start == 0:
             self.init()
             self.start = 1
         # update enemy
-        self.update(prect, pbullets , px , py)
+        self.update(prect, pbullets , px , py,plevel)
         self.draw()
         self.score.show_score()
 

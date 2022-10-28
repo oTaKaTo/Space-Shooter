@@ -1,5 +1,5 @@
 import pygame
-
+from button import *
 from PBullet import Pbullet
 from xpbar import *
 from healthbar import *
@@ -181,6 +181,8 @@ class Player:
                     self.invis_cooldown = 0
 
         if self.HP <= 0 :
+            self.gameover = 1
+        if key[pygame.K_ESCAPE]:
             self.gameover = 1
 
 

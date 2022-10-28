@@ -90,7 +90,7 @@ while running:
             pygame.mixer.music.play(-1)
             music_play = 1
         #b.run(p.x, p.y)
-        e.run(p.rect, p.bullets , p.x , p.y)
+        e.run(p.rect, p.bullets , p.x , p.y ,p.level)
         p.run(e.rect, e.numbers ,e.bullets,e.KP)
 
     clock.tick(60)

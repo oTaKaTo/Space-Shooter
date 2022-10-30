@@ -4,6 +4,7 @@ from settings import *
 
 class Pbullet:
     def __init__(self, x, y,type,plevel):
+
         self.damage = 10
         self.level = plevel
         self.x = x + 2
@@ -14,11 +15,11 @@ class Pbullet:
         self.type = type # 0 laser  1 cannon  2 ball
 
         if self.type == 1:
-            self.damage = 200 * (1 + (self.level - 1 /10))
+            self.damage = 200 * (1 + (self.level - 1 /5))
         elif self.type == 2:
-            self.damage = 10 * (1 + (self.level - 1 /10))
+            self.damage = 5 * (1 + (self.level - 1 /10))
         elif self.type == 0:
-            self.damage = 20 * (1 + (self.level - 1 /10))
+            self.damage = 10 * (1 + (self.level - 1 /10))
         # Animation change time
         self.totaltime = 0
         self.value = 0
@@ -34,7 +35,7 @@ class Pbullet:
     def update(self):
         self.totaltime += dt
         if self.type == 0:
-            self.speed = 5000 * dt
+            self.speed = 6500 * dt
             if self.value >= len(self.laser):
                 self.value = 0
             self.bulletImg = self.laser[self.value]

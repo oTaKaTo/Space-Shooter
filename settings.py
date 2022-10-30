@@ -10,6 +10,21 @@ bgm = pygame.mixer.music.load("sound/bgm.mp3")
 ecrash = pygame.mixer.Sound("sound/ecrash.wav")
 level_up = pygame.mixer.Sound("sound/levelup.wav")
 home = pygame.mixer.music.load("sound/home.wav")
+
+click_sound = pygame.mixer.Sound("sound/click_sound.wav")
+
+heavy_item = pygame.mixer.Sound("sound/heavy_item.wav")
+heavy_shoot = pygame.mixer.Sound("sound/heavy_shoot.wav")
+
+laser_item = pygame.mixer.Sound("sound/laser_item_metal_slug.wav")
+
+plasma_item = pygame.mixer.Sound("sound/plasma_item_edited.wav")
+plasma_shoot = pygame.mixer.Sound("sound/plasma_pew.wav")
+
+rapid_item = pygame.mixer.Sound("sound/power_item.mp3")
+heal = pygame.mixer.Sound("sound/heal.wav")
+xpboostsound = pygame.mixer.Sound("sound/xpboost.mp3")
+
 # font
 font = pygame.font.Font('font/8Bit.ttf', 20)
 main_font = pygame.font.Font('font/8-BITWONDER.ttf', 54)
@@ -36,6 +51,7 @@ pygame.display.set_caption("Space Shooter")
 icon = pygame.image.load("pic/icon.png")
 pygame.display.set_icon(icon)
 
+how_to_play = pygame.image.load("pic/how to play.png")
 # Background
 bg = pygame.image.load("pic/bg.jpg")
 bg_height = bg.get_height()
@@ -50,6 +66,16 @@ panels = math.ceil(HEIGHT / bg_height) + 2
 
 clock = pygame.time.Clock()
 dt = clock.tick(144)/1000
+
+# Items
+Rapid = pygame.image.load("pic/item/Buffs/attack_speed_boost.png")
+Hpotion = pygame.image.load("pic/item/Red Potions/1.png")
+lasergun = pygame.image.load("pic/item/WeaponPack/lasergun.png")
+plasmaball = pygame.image.load("pic/item/WeaponPack/plasmaball.png")
+heavybull = pygame.image.load("pic/item/WeaponPack/heavybull.png")
+xpboost = pygame.image.load("pic/item/Buffs/exp_boost.png")
+
+
 # bullets
 laser = [ pygame.image.load("pic/bullet/laser/1.png"),
           pygame.image.load("pic/bullet/laser/2.png"),

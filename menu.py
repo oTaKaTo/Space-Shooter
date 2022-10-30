@@ -35,10 +35,13 @@ class Menu:
         score.run()
         quit.run()
         if start.clicked:
+            click_sound.play()
             self.game_state = 1
         if score.clicked :
             self.score_state = 1
+            click_sound.play()
         if quit.clicked:
+            click_sound.play()
             self.quit = 1
 
 

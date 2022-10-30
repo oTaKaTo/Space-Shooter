@@ -6,6 +6,7 @@ from bullet import *
 from player import *
 from menu import *
 from summary import *
+from how import *
 
 music_play = 1
 
@@ -15,7 +16,7 @@ b = Bullet()
 e = Enemy()
 m = Menu()
 l = Leaderboard()
-
+h = How()
 
 # Game Loop
 running = True
@@ -69,7 +70,8 @@ while running:
         m.draw(font, main_font)
         # If mouse click start
         if m.game_state:
-            game_state = 3
+            game_state = 5
+            m.game_state = 0
         if m.score_state:
             game_state = 2
         if m.quit:
@@ -83,7 +85,15 @@ while running:
             l.back = 0
             game_state = 1
 
-
+    # how to play screen
+    if game_state == 5:
+        h.draw()
+        if h.play:
+            game_state = 3
+            h.play = 0
+        if h.back:
+            game_state = 1
+            h.back = 0
 
 
 
@@ -98,7 +108,7 @@ while running:
             music_play = 1
 
         e.run(p.rect, p.bullets , p.x , p.y ,p.level)
-        p.run(e.rect, e.numbers ,e.bullets,e.KP)
+        p.run(e.rect, e.numbers ,e.bullets,e.KP,e.items)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

@@ -54,4 +54,5 @@ class Leaderboard:
             label[2].run()
         backButton.run()
         if backButton.clicked:
+            click_sound.play()
             self.back = 1

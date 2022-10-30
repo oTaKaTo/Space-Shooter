@@ -1,5 +1,5 @@
 import random
-
+from item import *
 from settings import *
 from bullet import *
 from EBullet import New_bullet
@@ -29,6 +29,7 @@ class Enemy:
         self.x = []
         self.y = []
         self.type = []
+        self.items = []
         self.bullets = []
         self.numbers = 10
         self.old_num = 5
@@ -74,12 +75,12 @@ class Enemy:
             self.x[i] -= 1
 
     def bounce_movement(self,i, rect):
-        if self.x[i] < WIDTH - rect[2] and self.direction[i] == 1:
+        if self.x[i] <= WIDTH - rect[2] and self.direction[i] == 1:
             self.x[i] += 3 * self.direction[i]
-            if self.x[i] > WIDTH - rect[2]:
+            if self.x[i] >= WIDTH - rect[2]:
                 self.direction[i] = -1
 
-        if self.x[i] > 0 and self.direction[i] == -1:
+        if self.x[i] >= 0 and self.direction[i] == -1:
             self.x[i] += 3 * self.direction[i]
             if self.x[i] <= 1:
                 self.direction[i] = 1
@@ -191,8 +192,17 @@ class Enemy:
     def update(self,prect, pbullets , px ,py , plevel):
         self.counttime += dt
         self.totaltime += dt
-        self.score.score_value += dt * (1 + (plevel*2))
 
+        # score running up up
+        self.score.score_value += dt * (plevel*4)
+
+
+        # Run and check items
+        for i, item in enumerate(self.items):
+            item.run(prect)
+            if item.y >= 1032:
+                del self.items[i]
+                break
 
         for i, bullet in enumerate(self.bullets):
             bullet.run(prect)
@@ -287,6 +297,13 @@ class Enemy:
                     self.KP += 10
                     self.score.score_value += 1000
                 self.crash(self.x[i],self.y[i])
+
+                # random item rate 10%
+                rand_type = random.randint(1,20)
+                if rand_type >= 1 and rand_type <=2:
+                    # input type for calculate hitbox
+                    self.items.append(Item(self.x[i],self.y[i],self.type[i]))
+
                 ecrash.play()
                 self.remove_enemy(i)
                 rand = random.randint(0, 20)

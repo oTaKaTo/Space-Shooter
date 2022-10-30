@@ -15,8 +15,8 @@ class XPbar (pygame.sprite.Sprite):
         self.xp_ratio = self.max_xp / self.xp_bar_length
         self.xp_change_speed = 1
 
-    def update(self,maxxp , curxp):
-        self.basic_xp(maxxp , curxp)
+    def update(self,maxxp , curxp , boost):
+        self.basic_xp(maxxp , curxp,boost)
         #self.advanced_xp(maxxp , curxp)
 
 
@@ -32,12 +32,17 @@ class XPbar (pygame.sprite.Sprite):
         if self.target_xp >= self.max_xp:
             self.target_xp = self.max_xp
 
-    def basic_xp(self,maxxp , curxp):
+    def basic_xp(self,maxxp , curxp,boost):
+        if boost != 1:
+            color = cyan
+        else:
+            color = yellow
+
         self.max_xp = maxxp
         self.cur_xp = curxp
         self.xp_ratio = self.max_xp / self.xp_bar_length
 
-        pygame.draw.rect(screen, yellow, (10, 40, self.target_xp/self.xp_ratio , 10))
+        pygame.draw.rect(screen, color, (10, 40, self.target_xp/self.xp_ratio , 10))
         pygame.draw.rect(screen, white, (10, 40, self.xp_bar_length, 10),2)
 
     def advanced_xp(self,maxxp , curxp):

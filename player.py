@@ -61,10 +61,7 @@ class Player:
 
     def stop_sound(self):
         plasma_shoot.stop()
-        plasma_item.stop()
-        laser_item.stop()
         pshoot.stop()
-        heavy_item.stop()
         heavy_shoot.stop()
 
 
@@ -278,8 +275,10 @@ class Player:
                 self.xp_boost_timer = 0
 
         if self.HP <= 0 :
+            game_over_sound.play()
             self.gameover = 1
         if key[pygame.K_ESCAPE]:
+            game_over_sound.play()
             self.gameover = 1
 
 

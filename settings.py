@@ -10,6 +10,7 @@ bgm = pygame.mixer.music.load("sound/bgm.mp3")
 ecrash = pygame.mixer.Sound("sound/ecrash.wav")
 level_up = pygame.mixer.Sound("sound/levelup.wav")
 home = pygame.mixer.music.load("sound/home.wav")
+game_over_sound = pygame.mixer.Sound("sound/game_over_edited.wav")
 
 click_sound = pygame.mixer.Sound("sound/click_sound.wav")
 

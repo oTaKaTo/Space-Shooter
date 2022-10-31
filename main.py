@@ -2,7 +2,6 @@ import pygame.mixer_music
 from leaderboard import *
 from enemy import *
 from settings import *
-from bullet import *
 from player import *
 from menu import *
 from summary import *
@@ -12,7 +11,6 @@ music_play = 1
 
 # class setup
 p = Player()
-b = Bullet()
 e = Enemy()
 m = Menu()
 l = Leaderboard()
@@ -49,13 +47,11 @@ while running:
         if s.click == 1:
             del p
             del e
-            del b
             del m
             del s
             s = Summary()
             p = Player()
             e = Enemy()
-            b = Bullet()
             m = Menu()
             game_state = 1
 

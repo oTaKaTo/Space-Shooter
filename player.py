@@ -224,29 +224,35 @@ class Player:
                     if item.type == 1:
                         self.type = 0
                         self.stop_sound()
+                        ecrash.stop()
                         laser_item.play()
                     elif item.type == 2:
                         self.type = 1
                         self.stop_sound()
+                        ecrash.stop()
                         heavy_item.play()
                     elif item.type == 3:
                         self.type = 2
                         self.stop_sound()
+                        ecrash.stop()
                         plasma_item.play()
                     elif item.type == 4:
                         self.HP += 20 + (self.level // 3)
                         self.stop_sound()
+                        ecrash.stop()
                         heal.play()
                         if self.HP >= self.Max_HP:
                             self.HP = self.Max_HP
                         self.hb.get_health(20 + (self.level // 3))
                     elif item.type == 5:
                         self.stop_sound()
+                        ecrash.stop()
                         rapid_item.play()
                         self.rapid_timer = 0
                         self.rapid = 0.3
                     elif item.type == 6:
                         self.stop_sound()
+                        ecrash.stop()
                         xpboostsound.play()
                         multiplier =  1 + (self.level // 10)
                         self.xp_boost = 2 * multiplier

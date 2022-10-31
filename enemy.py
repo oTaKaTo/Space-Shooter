@@ -1,7 +1,7 @@
 import random
 from item import *
 from settings import *
-from bullet import *
+
 from EBullet import New_bullet
 from score import *
 class Enemy:
@@ -269,7 +269,8 @@ class Enemy:
                 self.counttime = 0
             if pygame.time.get_ticks() - self.shoot_timer[i] > 5000:
                 self.shoot_timer[i] = pygame.time.get_ticks()
-                self.create_bullets(self.x[i], self.y[i] ,self.type[i])
+                if self.y[i] >= -20:
+                    self.create_bullets(self.x[i], self.y[i] ,self.type[i])
 
             #for ebullet in self.bullets:
             #    if ebullet.hitbox.colliderect(prect):

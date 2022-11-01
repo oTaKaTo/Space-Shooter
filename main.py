@@ -114,3 +114,4 @@ while running:
 
 
     pygame.display.update()
+exit()

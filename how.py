@@ -24,5 +24,3 @@ class How:
             self.back = 1
             back.clicked = 0
 
-
-

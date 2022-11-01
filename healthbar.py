@@ -21,7 +21,6 @@ class Healthbar (pygame.sprite.Sprite):
         self.basic_health(Max_HP,curHP)
         #self.advanced_health(Max_HP,curHP)
 
-
     def get_damage(self,amount):
         if self.target_HP > 0:
             self.target_HP -= amount

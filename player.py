@@ -64,7 +64,6 @@ class Player:
         pshoot.stop()
         heavy_shoot.stop()
 
-
     def show_level(self):
         self.level_text = font.render("level : " + str(self.level), True, (255, 255, 255))
         screen.blit(self.level_text, (600, 40))
@@ -75,11 +74,11 @@ class Player:
             self.delay = 0.07 * self.rapid
         elif self.type == 1:
             if self.level <= 10:
-                self.delay = 0.3
+                self.delay = 0.25 * self.rapid
             else:
-                self.delay = (0.3 / (self.level/10)) * self.rapid
+                self.delay = (0.25 / (self.level/10)) * self.rapid
         elif self.type == 2:
-            self.delay = 0.4 * self.rapid
+            self.delay = 0.25 * self.rapid
 
 
 
@@ -193,9 +192,10 @@ class Player:
             if ebullet.hitbox.colliderect(self.hitbox):
                 if ebullet.hitable:
                     if self.invis_cooldown == 0:
+                        debull_HP = 10 * (1+ (self.level/15))
                         ebullet.hitable = 0
-                        self.HP -= 10
-                        self.hb.get_damage(10)
+                        self.HP -= debull_HP
+                        self.hb.get_damage(debull_HP)
                         self.stop_sound()
                         phit.play()
                         self.invis_cooldown = 1
@@ -207,8 +207,9 @@ class Player:
 
                 if self.rect.colliderect(erect[i]):
                     if self.invis_cooldown == 0:
-                        self.HP -= 10
-                        self.hb.get_damage(10)
+                        de_HP = 10 * (1+ (self.level/7))
+                        self.HP -= de_HP
+                        self.hb.get_damage(de_HP)
                         self.stop_sound()
                         phit.play()
                         self.invis_cooldown = 1
@@ -237,7 +238,7 @@ class Player:
                         ecrash.stop()
                         plasma_item.play()
                     elif item.type == 4:
-                        self.HP += 20 + (self.level // 3)
+                        self.HP += 20 + (self.level // 15)
                         self.stop_sound()
                         ecrash.stop()
                         heal.play()

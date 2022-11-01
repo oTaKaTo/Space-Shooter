@@ -15,22 +15,21 @@ class Pbullet:
         self.type = type # 0 laser  1 cannon  2 ball
 
         if self.type == 1:
-            self.damage = 200 * (1 + (self.level - 1 /5))
+            self.damage = 200 * (self.level/ 5)
         elif self.type == 2:
-            self.damage = 5 * (1 + (self.level - 1 /10))
+            self.damage = (3 + ((self.level - 1)/15))
         elif self.type == 0:
-            self.damage = 10 * (1 + (self.level - 1 /10))
+            self.damage = 10 * (1 + (self.level / 2))
         # Animation change time
         self.totaltime = 0
         self.value = 0
-        self.change_time = 50/1000
+        self.change_time = 75/1000
 
         self.laser = laser
         self.cannon = cannon
         self.ball = ball
 
         self.hitbox = pygame.Rect(self.x+20 ,self.y,64, 64)
-
 
     def update(self):
         self.totaltime += dt

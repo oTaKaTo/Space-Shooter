@@ -10,7 +10,6 @@ class Menu:
         self.quit = 0
 
 
-
     def draw(self, font, label_font):
 
         start = Button(((WIDTH - 120)/2, (HEIGHT*5/10 -60/2),120,60),white,"START",24,screen,border_color=white,border_width=4)
@@ -25,7 +24,6 @@ class Menu:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                exit()
                 pygame.quit()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_ESCAPE]:

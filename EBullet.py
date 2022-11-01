@@ -25,7 +25,6 @@ class New_bullet:
         self.change_time = 50/1000
         self.hitbox = pygame.Rect(self.x+20 ,self.y,64, 64)
 
-
         self.laser = laser
         self.cannon = cannon
         self.ball = ball

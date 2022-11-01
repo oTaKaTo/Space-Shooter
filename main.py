@@ -94,7 +94,6 @@ while running:
 
 
 
-
     if game_state == 3:
         pygame.mouse.set_visible(False)
         if music_play == 0:
@@ -109,6 +108,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            exit()
     clock.tick(60)
 
 

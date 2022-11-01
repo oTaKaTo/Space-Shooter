@@ -338,7 +338,6 @@ class Enemy:
                 self.big_enemy()
 
 
-
     def draw(self):
         for i in range(self.numbers):
             if self.type[i] == 0:

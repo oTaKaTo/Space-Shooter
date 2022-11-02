@@ -14,12 +14,14 @@ class Pbullet:
         # self.state = False
         self.type = type # 0 laser  1 cannon  2 ball
 
+        # Damage
         if self.type == 1:
             self.damage = 200 * (self.level/ 5)
         elif self.type == 2:
             self.damage = (3 + ((self.level - 1)/15))
         elif self.type == 0:
-            self.damage = 10 * (1 + (self.level / 2))
+            self.damage = 10 * (1 + (self.level / 1.5))
+
         # Animation change time
         self.totaltime = 0
         self.value = 0

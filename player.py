@@ -71,14 +71,14 @@ class Player:
     def update(self, erect, enum , ebull , KP , items):
 
         if self.type == 0:
-            self.delay = 0.07 * self.rapid
+            self.delay = 0.06 * self.rapid
         elif self.type == 1:
             if self.level <= 10:
-                self.delay = 0.25 * self.rapid
+                self.delay = 0.2 * self.rapid
             else:
-                self.delay = (0.25 / (self.level/10)) * self.rapid
+                self.delay = (0.2 / (self.level/10)) * self.rapid
         elif self.type == 2:
-            self.delay = 0.25 * self.rapid
+            self.delay = 0.2 * self.rapid
 
 
 

@@ -1,5 +1,3 @@
-import pygame
-
 from settings import *
 
 class New_bullet:

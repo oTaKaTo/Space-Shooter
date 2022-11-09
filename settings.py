@@ -8,10 +8,12 @@ pshoot = pygame.mixer.Sound("sound/pshot.wav")
 phit = pygame.mixer.Sound("sound/pcrack.wav")
 bgm = pygame.mixer.music.load("sound/bgm.mp3")
 ecrash = pygame.mixer.Sound("sound/ecrash.wav")
+pop = pygame.mixer.Sound("sound/pop.mp3")
 level_up = pygame.mixer.Sound("sound/levelup.wav")
 home = pygame.mixer.music.load("sound/home.wav")
 game_over_sound = pygame.mixer.Sound("sound/game_over_edited.wav")
 
+change_movement = pygame.mixer.Sound("sound/change_movement.wav")
 click_sound = pygame.mixer.Sound("sound/click_sound.wav")
 
 heavy_item = pygame.mixer.Sound("sound/heavy_item.wav")

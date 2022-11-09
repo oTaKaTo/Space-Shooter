@@ -1,5 +1,3 @@
-import pygame
-
 from settings import *
 
 class Pbullet:
@@ -9,6 +7,7 @@ class Pbullet:
         self.level = plevel
         self.x = x + 2
         self.y = y + 10
+        self.waveoffset = random.random() * 6
         self.speed = 1000 * dt
         self.hitable = 1
         # self.state = False
@@ -18,7 +17,7 @@ class Pbullet:
         if self.type == 1:
             self.damage = 200 * (self.level/ 5)
         elif self.type == 2:
-            self.damage = (4.5 + ((self.level - 1)/10))
+            self.damage = (4.5 + ((self.level - 1)/6))
         elif self.type == 0:
             self.damage = 10 * (1 + (self.level / 1.4))
 
@@ -32,6 +31,7 @@ class Pbullet:
         self.ball = ball
 
         self.hitbox = pygame.Rect(self.x+20 ,self.y,64, 64)
+
 
     def update(self):
         self.totaltime += dt
@@ -57,7 +57,11 @@ class Pbullet:
             self.bulletImg = pygame.transform.scale(self.bulletImg, (64, 64))
         # key = pygame.key.get_pressed()
         # if key[pygame.K_SPACE] and self.state == False or pygame.mouse.get_pressed()[0] and self.state == False :
-        self.y -= self.speed
+        if self.type == 2:
+            self.x -= self.speed*(4*math.sin(self.y/32+self.waveoffset))
+            self.y -= self.speed
+        else:
+            self.y -= self.speed
 
         if self.totaltime >= self.change_time:
             self.value += 1

@@ -1,4 +1,3 @@
-from settings import *
 import json
 from button import *
 from text import *

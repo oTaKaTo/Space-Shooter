@@ -283,6 +283,8 @@ class Enemy:
                 if self.rect[i].colliderect(pbullet.hitbox):
                      if pbullet.hitable == 1:
                         self.hp[i] -= pbullet.damage
+                        if self.hp[i] > 0 :
+                            pop.play()
                      if pbullet.type != 2:
                         pbullet.hitable = 0
 

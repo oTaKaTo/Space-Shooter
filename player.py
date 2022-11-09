@@ -1,9 +1,8 @@
-import pygame
-from button import *
+
 from PBullet import Pbullet
 from xpbar import *
 from healthbar import *
-from enemy import *
+
 from settings import *
 
 class Player:
@@ -38,12 +37,22 @@ class Player:
         self.xp_boost_timer = 0
         self.xp_boost_duration = 3
 
+        # Movement mode
+        self.movement = 1  # 1 = mouse   2 = keyboard
+        self.mode_delay = 0
+        self.mode_timer = 0
+        self.mode_duration = 0.08
+
+        self.mode_text_show = 0
+        self.mode_text_show_duration = 0.5
+        self.mode_text_show_timer = 0
 
         # bullet systems
         self.bullets = []
         self.delay = 0.1 * self.rapid
         self.count_time = 0
         self.type = 0
+
         self.weapon_change_cooldown = 0
         self.weapon_change_timer = 0
         self.weapon_change_time = 5
@@ -107,19 +116,51 @@ class Player:
 
         invictimer = 0
         self.count_time += dt
-        if  pygame.mouse.get_focused():
-            self.x, self.y = pygame.mouse.get_pos()
-            self.x -= 28
-            self.y -= 22
+        if self.movement == 1:
+            if  pygame.mouse.get_focused():
+                self.x, self.y = pygame.mouse.get_pos()
+                self.x -= 28
+                self.y -= 22
         key = pygame.key.get_pressed()
-        if key[pygame.K_a] or key[pygame.K_LEFT]:
-             self.x -= self.speed
-        if key[pygame.K_d] or key[pygame.K_RIGHT]:
-             self.x += self.speed
-        if key[pygame.K_w] or key[pygame.K_UP]:
-             self.y -= self.speed
-        if key[pygame.K_s] or key[pygame.K_DOWN]:
-             self.y += self.speed
+        if self.movement == 2:
+            if key[pygame.K_a] or key[pygame.K_LEFT]:
+                 self.x -= self.speed
+            if key[pygame.K_d] or key[pygame.K_RIGHT]:
+                 self.x += self.speed
+            if key[pygame.K_w] or key[pygame.K_UP]:
+                 self.y -= self.speed
+            if key[pygame.K_s] or key[pygame.K_DOWN]:
+                 self.y += self.speed
+
+        # change movement mode
+        if key[pygame.K_F10]:
+            if self.mode_delay == 0:
+                change_movement.play()
+                self.mode_delay = 1
+                self.mode_text_show = 1
+                self.mode_text_show_timer = 0
+                if self.movement == 1:
+                    self.movement = 2
+                elif self.movement == 2:
+                    self.movement = 1
+
+        if self.mode_text_show == 1:
+            self.mode_text_show_timer += dt
+            if self.mode_text_show_timer >= self.mode_text_show_duration:
+                self.mode_text_show = 0
+                self.mode_text_show_timer = 0
+            if self.movement == 1:
+                mode_text = font.render("Movement Mode  :  Mouse", True, (255, 255, 255))
+                screen.blit(mode_text, ((WIDTH - mode_text.get_width()) / 2, (HEIGHT - mode_text.get_height()) / 2))
+            elif self.movement == 2:
+                mode_text = font.render("Movement Mode  :  Keyboard", True, (255, 255, 255))
+                screen.blit(mode_text, ((WIDTH - mode_text.get_width()) / 2, (HEIGHT - mode_text.get_height()) / 2))
+
+        if self.mode_delay == 1:
+            self.mode_timer += dt
+            if self.mode_timer >= self.mode_duration:
+                self.mode_timer = 0
+                self.mode_delay = 0
 
         if key[pygame.K_SPACE] and self.count_time >= self.delay or pygame.mouse.get_pressed()[0] and self.count_time >= self.delay :
             self.count_time = 0
@@ -141,9 +182,9 @@ class Player:
         #if key[pygame.K_x] and self.weapon_change_cooldown == 0:
         #    self.type = 1
         #    self.weapon_change_cooldown = 1
-        #if key[pygame.K_c] and self.weapon_change_cooldown == 0:
-        #    self.type = 2
-        #    self.weapon_change_cooldown = 1
+        # if key[pygame.K_c] and self.weapon_change_cooldown == 0:
+        #     self.type = 2
+        #     self.weapon_change_cooldown = 1
         #if self.weapon_change_cooldown == 1:
         #    self.weapon_change_timer += dt
         #    if self.weapon_change_timer >= self.weapon_change_time:
@@ -299,6 +340,6 @@ class Player:
         #pygame.draw.rect(screen, (255, 0, 0), self.hitbox, 2)
 
     def run(self, erect, enum , ebull,eKP, items):
-        self.update(erect, enum , ebull,eKP, items)
         self.draw_player()
+        self.update(erect, enum , ebull,eKP, items)
         self.draw_gui()

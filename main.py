@@ -1,7 +1,5 @@
-import pygame.mixer_music
 from leaderboard import *
 from enemy import *
-from settings import *
 from player import *
 from menu import *
 from summary import *

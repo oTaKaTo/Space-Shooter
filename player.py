@@ -133,7 +133,7 @@ class Player:
                  self.y += self.speed
 
         # change movement mode
-        if key[pygame.K_F10]:
+        if key[pygame.K_j]:
             if self.mode_delay == 0:
                 change_movement.play()
                 self.mode_delay = 1

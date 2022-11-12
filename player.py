@@ -233,13 +233,13 @@ class Player:
             if ebullet.hitbox.colliderect(self.hitbox):
                 if ebullet.hitable:
                     if self.invis_cooldown == 0:
-                        debull_HP = 10 * (1+ (self.level/15))
                         ebullet.hitable = 0
+                        self.invis_cooldown = 1
+                        debull_HP = 10 * (1+ (self.level/15))
                         self.HP -= debull_HP
                         self.hb.get_damage(debull_HP)
                         self.stop_sound()
                         phit.play()
-                        self.invis_cooldown = 1
 
         # Enemy crash collision
         if len(erect) >= 1:

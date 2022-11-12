@@ -63,6 +63,7 @@ class Pbullet:
         else:
             self.y -= self.speed
 
+        # Change animation
         if self.totaltime >= self.change_time:
             self.value += 1
             self.totaltime = 0

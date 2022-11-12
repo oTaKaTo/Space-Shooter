@@ -17,9 +17,9 @@ class Pbullet:
         if self.type == 1:
             self.damage = 200 * (self.level/ 5)
         elif self.type == 2:
-            self.damage = (4.5 + ((self.level - 1)/6.5))
+            self.damage = (4.5 + ((self.level - 1)/6))
         elif self.type == 0:
-            self.damage = 10 * (1 + (self.level / 1.8))
+            self.damage = 10 * (1 + (self.level / 1.7))
 
         # Animation change time
         self.totaltime = 0

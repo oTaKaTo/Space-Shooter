@@ -7,9 +7,9 @@ class How:
         self.back = 0
 
     def draw(self):
-        play = Button((625, 820, 120, 60), white, "PLAY", 24, screen,
+        play = Button((625, 840, 120, 60), white, "PLAY", 24, screen,
                        border_color=white, border_width=4)
-        back = Button((625, 890, 120, 60), white, "BACK", 24, screen,
+        back = Button((625, 910, 120, 60), white, "BACK", 24, screen,
                       border_color=white, border_width=4)
         screen.blit(how_to_play, (0, 0))
         play.run()

@@ -54,7 +54,7 @@ pygame.display.set_caption("Space Shooter")
 icon = pygame.image.load("pic/icon.png")
 pygame.display.set_icon(icon)
 
-how_to_play = pygame.image.load("pic/how to play.png")
+how_to_play = pygame.image.load("pic/how to play new.png")
 # Background
 bg = pygame.image.load("pic/bg.jpg")
 bg_height = bg.get_height()

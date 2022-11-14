@@ -89,9 +89,6 @@ while running:
             game_state = 1
             h.back = 0
 
-
-
-
     if game_state == 3:
         pygame.mouse.set_visible(False)
         if music_play == 0:
